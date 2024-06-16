@@ -15,7 +15,7 @@ import {
 console.warn("Scripts Reloaded");
 
 let timeUntilGameStarts = -1;
-let setStartTime = 15
+let setStartTime = 15;
 let gameInProgress = false;
 let readyPlayers;
 
@@ -63,12 +63,14 @@ system.runInterval(() => {
     }
 
     if (player.hasTag("developer") && !player.hasTag("givenDeveloperTag")) {
-      player.addTag("givenDeveloperTag")
-      player.sendMessage("§aYou now have access to commands. Use !help list for a list of commands")
+      player.addTag("givenDeveloperTag");
+      player.sendMessage(
+        "§aYou now have access to commands. Use !help list for a list of commands"
+      );
     }
     if (player.hasTag("givenDeveloperTag") && !player.hasTag("developer")) {
-      player.removeTag("givenDeveloperTag")
-      player.sendMessage("§cYou no longer have access to commands")
+      player.removeTag("givenDeveloperTag");
+      player.sendMessage("§cYou no longer have access to commands");
     }
   });
 

@@ -7,9 +7,18 @@ import {
   EquipmentSlot,
   EnchantmentType,
   EntityComponentTypes,
+  Player,
 } from "@minecraft/server";
 import { config, helpList } from "./global.js";
 
+/**
+ * Shows basic usage of command to player
+ *
+ * @export
+ * @param {Player} player Player to show command to
+ * @param {string} command Command to return usage for
+ * @returns {void}
+ */
 export function showCommand(player, command) {
   let formattedCommand = command;
   if (command.charAt(0) != "!") {
@@ -20,6 +29,15 @@ export function showCommand(player, command) {
   );
 }
 
+/**
+ * Lets players with the developer tag modify the configuration
+ *
+ * @export
+ * @param {Player} player
+ * @param {string} item
+ * @param {string} value
+ * @returns {void}
+ */
 export function configItem(player, item, value) {
   try {
     config[item] = value;
@@ -29,6 +47,15 @@ export function configItem(player, item, value) {
   }
 }
 
+/**
+ * Lets players with the developer tag run a function
+ * @see functionParser
+ *
+ * @export
+ * @param {Player} player Developer attempting to run a function
+ * @param {string} functionToRun Function user is trying to run
+ * @returns {void}
+ */
 export function runFunction(player, functionToRun) {
   try {
     functionParser(functionToRun);
@@ -38,6 +65,12 @@ export function runFunction(player, functionToRun) {
   }
 }
 
+/**
+ * Clears and spawns lootboxes on the map
+ *
+ * @export
+ * @returns {void}
+ */
 export function spawnLootboxes() {
   const structure = world.structureManager;
   const overworld = world.getDimension("overworld");
@@ -58,6 +91,12 @@ export function spawnLootboxes() {
   }
 }
 
+/**
+ * Reloads the map, placing the map and refreshing the lootboxes.
+ *
+ * @export
+ * @returns {void}
+ */
 export function reloadMap() {
   const structure = world.structureManager;
   const overworld = world.getDimension("overworld");
@@ -82,6 +121,13 @@ export function reloadMap() {
 }
 
 // thank you stack exchange
+/**
+ * Shuffles an array and assigns the array to the shuffled value
+ *
+ * @export
+ * @param {array} array Array to shuffle
+ * @returns {void}
+ */
 export function shuffle(array) {
   let currentIndex = array.length;
 
@@ -96,6 +142,13 @@ export function shuffle(array) {
   }
 }
 
+/**
+ * Randomly assigns player teams
+ *
+ * @export
+ * @param {array} players Array containing in-game players
+ * @returns {void}
+ */
 export function chooseTeams(players) {
   let teamRedCount = Math.floor(players.length / 2);
   let teamBlueCount = Math.ceil(players.length / 2);
@@ -117,14 +170,21 @@ export function chooseTeams(players) {
   });
 }
 
+/**
+ * Parses function for !commands, running the specified command.
+ *
+ * @export
+ * @param {string} functionToParse
+ * @returns {any | undefined}
+ */
 export function functionParser(functionToParse) {
   switch (functionToParse) {
     case "reloadMap":
       reloadMap();
-      break
+      break;
     case "spawnLootboxes":
       spawnLootboxes();
-      break
+      break;
     default:
       return undefined;
   }
@@ -132,9 +192,9 @@ export function functionParser(functionToParse) {
 
 /**
  * Description: Parser for kits_config.js, returning appropriate equipment slot
- * Author: vy
+ * @author vy /switzr@tuta.io
  * @param {string} equipment
- * @returns {EquipmentSlot[enum]}
+ * @returns {string} Associated EquipmentSlot
  */
 export function equipmentSlotParser(equipment) {
   switch (equipment) {
@@ -151,6 +211,16 @@ export function equipmentSlotParser(equipment) {
   }
 }
 
+/**
+ * Selects a random class and returns information for it
+ *
+ * @export
+ * @returns {Object} kit Object with kit information
+ * @returns {string} kit.name Name of kit
+ * @returns {string} kit.title Displayed title for kit (/title)
+ * @returns {string} kit.subtitle Displayed subtitle for kit (/title)
+ * @returns {number} kit.bounty Bounty of kit
+ */
 export function randomClass() {
   let cumulativeWeight = 0;
   let weightedList = [];
@@ -178,14 +248,13 @@ export function randomClass() {
   }
 }
 
-
 /**
  * Give a player a kit based on kit name
  *
  * @export
  * @param {object} player
  * @param {string} kitName
- * @return {*} 
+ * @returns {*}
  */
 export function giveKit(player, kitName) {
   const kitObject = classKits[kitName];
