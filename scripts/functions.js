@@ -180,10 +180,14 @@ export function chooseTeams(players) {
 export function functionParser(functionToParse) {
   switch (functionToParse) {
     case "reloadMap":
-      reloadMap();
+      system.run(() => {
+        reloadMap()
+      })
       break;
     case "spawnLootboxes":
-      spawnLootboxes();
+      system.run(() => {
+        spawnLootboxes()
+      })
       break;
     default:
       return undefined;
