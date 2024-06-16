@@ -3,19 +3,19 @@
 	"header": {
 		"name": "Lucky Kingdoms Behavior Pack",
 		"description": "Behavior pack for Lucky Kingdoms",
-		"uuid": "959b6fab-4b62-42ce-ae74-21639b1dd878",
+		"uuid": "c84f2f99-1c8a-4d43-b351-f66d7f6c2a62",
 		"version": [1, 0, 0],
 		"min_engine_version": [1, 16, 0]
 	},
 	"modules": [
 		{
 			"type": "data",
-			"uuid": "2d3a402f-6177-45dc-9398-96e347bfcb08",
+			"uuid": "26bf31f7-ba18-4cd4-ae37-35c90c26cf7f",
 			"version": [1, 0, 0]
 		},
         {
             "type": "script",
-            "uuid": "f2d76190-e239-4bed-9979-348a9db87eb7",
+            "uuid": "34941714-d8a0-44ae-9ade-7ea7a1a686aa",
             "version": [1, 0, 0],
             "entry": "scripts/main.js"
         }
